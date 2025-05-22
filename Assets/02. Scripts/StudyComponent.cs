@@ -2,13 +2,29 @@ using UnityEngine;
 
 public class StudyComponent : MonoBehaviour
 {
-    // 에디터에서 인스턴스(게임 오브젝트)를 담을 obj 포인터 변수
-    public GameObject obj;  // GameObject: 자료형
-    public string changeName;
+    public GameObject obj;
 
+    public Mesh msh;
+    public Material mat;
+
+    // 런타임
     void Start()
     {
-        obj = GameObject.Find("Main Camera");
-        obj.name = changeName;
+        obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        //CreateCube();
+    }
+
+    public void CreateCube()
+    {
+        obj = new GameObject("Cube");
+
+        obj.AddComponent<MeshFilter>();
+        obj.GetComponent<MeshFilter>().mesh = msh;
+
+        obj.AddComponent<MeshRenderer>();
+        obj.GetComponent<MeshRenderer>().material = mat;
+
+        obj.AddComponent<BoxCollider>();
     }
 }
